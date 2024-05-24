@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Person</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="container">
+    <h1>Информация о человеке</h1>
+    <p>ID: <span th:text="${person.id}"></span></p>
+    <p>ФИО: <span th:text="${person.fullName}"></span></p>
+    <p>Год рождения: <span th:text="${person.birthYear}"></span></p>
+    <br>
+
+    <div th:if="${!books.isEmpty()}">
+        <hr/>
+        <h2>Книги</h2>
+        <br/>
+        <table th:each="book : ${books}">
+            <tr>
+                <td>
+                <span th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getPublicationYear()}"
+                      th:style="${book.isExpired} ? 'color: red' : 'color: black'">
+                    book
+                </span>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+    </div>
+
+    <form th:action="@{'/people/edit/' + ${person.id}}" method="get">
+        <button type="submit">Редактировать информацию</button>
+    </form>
+    <form th:action="@{'/people/delete/' + ${person.id}}" method="post">
+        <button type="submit">Удалить</button>
+    </form>
+
+    <hr>
+    <form action="/people" method="get">
+        <button type="submit">Список людей</button>
+    </form>
+</div>
+</body>
+</html>

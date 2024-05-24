@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit book</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>Редактирование информации</h1>
+    <form th:method="post" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+        <label for="title">Название книги: </label>
+        <input type="text" th:field="*{title}" id="title"/>
+        <p th:if="${#fields.hasErrors('title')}" class="error">Некорректный ввод</p>
+        <br/>
+
+        <label for="author">Автор: </label>
+        <input type="text" th:field="*{author}" id="author"/>
+        <p th:if="${#fields.hasErrors('author')}" class="error">Некорректный ввод</p>
+        <br/>
+
+        <label for="publicationYear">Год публикации: </label>
+        <input type="number" th:field="*{publicationYear}" id="publicationYear"/>
+        <p th:if="${#fields.hasErrors('publicationYear')}" class="error">Некорректный ввод</p>
+        <br/>
+
+        <label for="publishingHouse">Издательство: </label>
+        <input type="text" th:field="*{publishingHouse}" id="publishingHouse"/>
+        <p th:if="${#fields.hasErrors('publishingHouse')}" class="error">Некорректный ввод</p>
+        <br/>
+
+        <label for="numberOfCopies">Количество экземпляров: </label>
+        <input type="number" th:field="*{numberOfCopies}" id="numberOfCopies"/>
+        <p th:if="${#fields.hasErrors('numberOfCopies')}" class="error">Некорректный ввод</p>
+        <br/>
+
+        <hr>
+        <button type="submit">Редактировать</button>
+    </form>
+</div>

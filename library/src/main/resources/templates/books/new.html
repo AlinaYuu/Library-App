@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create book</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>Новая книга</h1>
+    <form action="#" th:action="@{/books/new}" th:object="${book}" method="post">
+        <label for="title">Название:</label>
+        <input type="text" th:field="*{title}" id="title" required><br>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error">Некорректный ввод</p>
+
+        <label for="author">Автор: </label>
+        <input type="text" th:field="*{author}" id="author" required><br>
+        <p th:if="${#fields.hasErrors('author')}" class="error">Некорректный ввод</p>
+
+        <label for="publicationYear">Год публикации: </label>
+        <input type="number" th:field="*{publicationYear}" id="publicationYear" required><br>
+        <p th:if="${#fields.hasErrors('publicationYear')}" class="error">Некорректный ввод</p>
+
+        <label for="publishingHouse">Издательство: </label>
+        <input type="text" th:field="*{publishingHouse}" id="publishingHouse" required><br>
+        <p th:if="${#fields.hasErrors('publishingHouse')}" class="error">Некорректный ввод</p>
+
+        <label for="numberOfCopies">Количество экземпляров: </label>
+        <input type="number" th:field="*{numberOfCopies}" id="numberOfCopies" required><br>
+        <p th:if="${#fields.hasErrors('numberOfCopies')}" class="error">Некорректный ввод</p>
+
+        <hr>
+        <button type="submit">Добавить</button>
+    </form>
+</div>

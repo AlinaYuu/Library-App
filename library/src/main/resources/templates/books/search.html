@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search book</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="container">
+
+    <form th:method="POST" th:action="@{/books/search}">
+        <label for="query">Введите поисковой запрос: </label>
+        <input type="text" id="query" name="query"/>
+        <br/>
+        <br/>
+        <button type="submit">Искать</button>
+    </form>
+
+    <div th:if="${books}">
+        <div th:if="${books.isEmpty()}">
+            <br>
+            <span>Книг не найдено</span>
+        </div>
+
+        <div th:each="book : ${books}">
+            <p th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getPublicationYear()}"></p>
+
+            <div th:if="${!book.getOwners().isEmpty()}">
+                <span>Книга сейчас находится у:</span>
+                <table>
+                    <tr th:each="owner : ${book.getOwners()}">
+                        <td>
+                            <span th:text="${owner.fullName + ', ' + owner.birthYear}"></span>
+                            <form th:action="@{'/books/release/' + ${book.id}}" method="post">
+                                <input type="hidden" name="personId" th:value="${owner.id}"/>
+                                <button type="submit">Забрать книгу</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of People</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>Редактирование информации</h1>
+    <form th:method="post" th:action="@{/people/{id}(id=${person.id})}" th:object="${person}">
+        <label for="fullName">ФИО: </label>
+        <input type="text" th:field="*{fullName}" id="fullName"/>
+        <p th:if="${#fields.hasErrors('fullName')}" class="error">Некорректный ввод</p>
+        <br/>
+        <label for="birthYear">Год рождения: </label>
+        <input type="number" th:field="*{birthYear}" id="birthYear"/>
+        <p th:if="${#fields.hasErrors('birthYear')}" class="error">Некорректный ввод</p>
+        <br/>
+        <hr>
+        <button type="submit">Редактировать</button>
+    </form>
+</div>
+</body>
+</html>

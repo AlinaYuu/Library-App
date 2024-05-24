@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of books</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>Список книг</h1>
+    <div th:each="book : ${books}">
+        <a th:href="@{'/books/' + ${book.id}}">
+            <span th:text="${book.getTitle() + ', ' + book.getAuthor()}"></span>
+            <br/>
+        </a>
+    </div>
+    <hr>
+    <form action="/books/new" method="get">
+        <button type="submit">Добавить книгу</button>
+    </form>
+</div>
